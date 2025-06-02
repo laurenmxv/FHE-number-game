@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@fhenixprotocol/cofhe-contracts": "^0.0.13",
+    "@openzeppelin/contracts": "^5.3.0",
     "cofhejs": "^0.2.0",
     "ethers": "^6.14.3"
   }
