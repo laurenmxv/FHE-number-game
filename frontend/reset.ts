@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import ABI from "./contract/BigNumberGameABI.json" assert { type: "json" };
 import * as dotenv from "dotenv";
+import { BigNumberGame } from "../typechain-types/contracts/BigNumberGame.js";
 dotenv.config();
 
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS!;
@@ -11,7 +12,7 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
 
 async function main() {
   console.log("Initializing contract");
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI.abi, wallet);
+  const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI.abi, wallet) as BigNumberGame;
 
   console.log("🔁 Sending reset tx");
   const tx = await contract.resetGame();
