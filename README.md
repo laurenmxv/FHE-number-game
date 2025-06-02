@@ -34,19 +34,23 @@ cd big-number-game
 pnpm install
 ```
 
-3. **Configure environment variables**
+3. **Configure environment variables (use env.example as a reference)**
 
 ```bash
 PRIVATE_KEY_1=0x...     # Player 1 wallet private key (also owner)
 PRIVATE_KEY_2=0x...     # Player 2 wallet private key
-CONTRACT_ADDRESS=0x...  # Your deployed BigNumberGame contract address
 SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/your-key
-
 ```
+
 4. **Deploy the contract**
 
 ```bash
-npx hardhat run scripts/deploy.ts --network sepolia
+pnpm hardhat run scripts/deploy.ts --network sepolia
+```
+
+3. **Configure contract environment variable**
+```bash
+CONTRACT_ADDRESS=0x...  # Your deployed BigNumberGame contract address
 ```
 
 5. **Run the game**

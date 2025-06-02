@@ -33,10 +33,10 @@ contract BigNumberGame {
             number2 = FHE.asEuint32(encryptedInput);
             FHE.allowThis(number2);
 
-            computeWinner(); 
+            computeWinner();
         }
     }
-    
+
     function computeWinner() internal {
         // ✅ Use FHE comparison (encrypted domain)
         ebool isP1Greater = FHE.gt(number1, number2);
@@ -58,24 +58,22 @@ contract BigNumberGame {
         FHE.allowSender(winnerEncrypted);
     }
 
-    
     function getEncryptedResult() external view returns (euint32, euint32) {
         require(msg.sender == player1 || msg.sender == player2, "Not a player");
 
         // Encrypted winner and diff can be unsealed client-side using cofhejs
         return (winnerEncrypted, difference);
     }
+
     function resetGame() external {
-    require(msg.sender == owner, "Only owner can reset");
+        require(msg.sender == owner, "Only owner can reset");
 
-    player1 = address(0);
-    player2 = address(0);
+        player1 = address(0);
+        player2 = address(0);
 
-    number1 = FHE.asEuint32(0);
-    number2 = FHE.asEuint32(0);
-    difference = FHE.asEuint32(0);
-    winnerEncrypted = FHE.asEuint32(0);
-}
-
-    
+        number1 = FHE.asEuint32(0);
+        number2 = FHE.asEuint32(0);
+        difference = FHE.asEuint32(0);
+        winnerEncrypted = FHE.asEuint32(0);
+    }
 }

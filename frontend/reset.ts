@@ -10,12 +10,13 @@ const provider = new ethers.JsonRpcProvider(process.env.SEPOLIA_RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
 
 async function main() {
+  console.log("Initializing contract");
   const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI.abi, wallet);
 
+  console.log("🔁 Sending reset tx");
   const tx = await contract.resetGame();
-  console.log("🔁 Sent reset tx:", tx.hash);
   await tx.wait();
-  console.log("✅ Game has been reset!");
+  console.log("✅ Game has been reset! tx:", tx.hash);
 }
 
 main().catch(console.error);
