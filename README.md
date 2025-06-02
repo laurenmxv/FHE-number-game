@@ -5,7 +5,7 @@ BigNumberGame is a fully homomorphic encryption (FHE)-powered smart contract whe
 - The encrypted difference between the two numbers
 - A sealed result that only the players can decrypt client-side
 
-Built with [Fhenix CoFHE](https://docs.fhenix.zone), this game keeps all logic private using encrypted types (`euint32`) and runs on Sepolia testnet.
+Built with [Fhenix CoFHE]([https://docs.fhenix.zone](https://cofhe-docs.fhenix.zone/docs/devdocs/overview)), this game keeps all logic private using encrypted types (`euint32`) and runs on Sepolia testnet.
 
 ---
 
