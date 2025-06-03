@@ -1,7 +1,8 @@
 import { ethers } from "ethers";
-import { cofhejs, Encryptable, FheTypes, CoFheInUint32 } from "cofhejs/node";
+import { cofhejs, Encryptable, FheTypes } from "cofhejs/node";
 import ABI from "./contract/BigNumberGameABI.json" assert { type: "json" };
 import * as dotenv from "dotenv";
+import { BigNumberGame } from "../typechain-types/contracts/BigNumberGame.js";
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ async function main() {
   });
 
   console.log("Initializing contract...");
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI.abi, wallet);
+  const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI.abi, wallet) as BigNumberGame;
 
   const player2Number = 10;
   console.log("🧠 Encrypting number:", player2Number);
@@ -27,12 +28,12 @@ async function main() {
     console.log(`Log Encrypt State :: ${state}`);
   };
 
-  const encrypted: [CoFheInUint32] = await cofhejs.encrypt(logState, [Encryptable.uint32(player2Number)]);
-  const input = encrypted.data?.[0];
-  if (!input) throw new Error("Encryption failed");
+  const results = await cofhejs.encrypt(logState, [Encryptable.uint32(player2Number)]);
+  if (!results.success || !results.data?.[0]) throw new Error("Encryption failed");
+  const encrypted = results.data?.[0];
 
-  console.log("📨 Submitting encrypted input to contract");
-  const tx = await contract.submitNumber(input);
+  console.log("📨 Submitting encrypted input to contract:");
+  const tx = await contract.submitNumber(encrypted);
   await tx.wait();
 
   console.log("Getting encrypted result...");
