@@ -21,7 +21,7 @@ async function main() {
   console.log("Initializing contract...");
   const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI.abi, wallet) as BigNumberGame;
 
-  const player2Number = 10;
+  const player2Number = 10n;
   console.log("🧠 Encrypting number:", player2Number);
 
   const logState = (state) => {

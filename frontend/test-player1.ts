@@ -7,7 +7,7 @@ dotenv.config();
 
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS!;
 const provider = new ethers.JsonRpcProvider(process.env.SEPOLIA_RPC_URL);
-const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
+const wallet = new ethers.Wallet(process.env.PRIVATE_KEY_1!, provider);
 
 async function main() {
   console.log("🔐 Initializing cofhejs with ethers signer + provider");
